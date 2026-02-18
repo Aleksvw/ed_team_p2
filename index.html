@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EIEAT · team · 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f7fa;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1a2b3e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 1.5rem 0 2.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1e2b3a, #2c3e50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            font-weight: 450;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 1rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: #0f6f5c;
+        }
+        .nav-links a.active {
+            color: #0f6f5c;
+            font-weight: 500;
+        }
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #0f6f5c;
+            border-radius: 4px;
+        }
+
+        .page-title {
+            margin: 1.5rem 0 2.5rem;
+        }
+        .page-title h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            background: linear-gradient(145deg, #1f2a3f, #1b4b3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-title .sub {
+            font-size: 1.2rem;
+            color: #4a5b6e;
+            margin-top: 0.5rem;
+            font-weight: 350;
+        }
+
+        .hero-cover {
+            width: 100%;
+            height: 380px;
+            border-radius: 2rem;
+            overflow: hidden;
+            margin: 3rem 0 4rem;
+            position: relative;
+            background: #1f3a3a;
+            box-shadow: 0 25px 40px -18px rgba(0,40,30,0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .hero-cover:hover {
+            transform: scale(1.005);
+            box-shadow: 0 35px 50px -20px #0b2f26;
+        }
+        .hero-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 1s ease;
+        }
+        .hero-cover .overlay-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(2px);
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0 3rem;
+        }
+
+        .team-card {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 2rem;
+            padding: 2rem 1.8rem 2rem;
+            box-shadow: 0 20px 40px -15px rgba(0,30,20,0.12);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .team-card:nth-child(1) { animation-delay: 0.1s; }
+        .team-card:nth-child(2) { animation-delay: 0.2s; }
+        .team-card:nth-child(3) { animation-delay: 0.3s; }
+        .team-card:nth-child(4) { animation-delay: 0.4s; }
+        .team-card:nth-child(5) { animation-delay: 0.5s; }
+        .team-card:nth-child(6) { animation-delay: 0.6s; }
+        .team-card:nth-child(7) { animation-delay: 0.7s; }
+        .team-card:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .team-card:hover {
+            background: rgba(255,255,255,0.95);
+            border-color: rgba(80, 150, 120, 0.2);
+            box-shadow: 0 30px 55px -18px #124d3b;
+            transform: translateY(-8px) scale(1.01);
+        }
+
+        .card-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 15px 25px -12px rgba(0,40,20,0.25);
+            margin-bottom: 1.3rem;
+            transition: border 0.2s;
+        }
+        .team-card:hover .card-image {
+            border-color: #9fd3c7;
+        }
+
+        .card-name {
+            font-size: 1.9rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #0f6f5c;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .card-desc {
+            color: #2c3e4f;
+            margin: 0.8rem 0 1.4rem;
+            font-size: 0.98rem;
+            line-height: 1.5;
+            border-left: 2px solid #b6d9cf;
+            padding-left: 1rem;
+        }
+
+        .card-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 550;
+            color: #0f6f5c;
+            text-decoration: none;
+            border-bottom: 1.5px solid transparent;
+            transition: border 0.2s, gap 0.2s;
+            width: fit-content;
+        }
+        .card-link:hover {
+            border-bottom-color: #0f6f5c;
+            gap: 0.7rem;
+        }
+
+        .footer-note {
+            margin-top: 5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            color: #4f6579;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 1rem 1.5rem; }
+            .nav-bar { flex-direction: column; align-items: start; gap: 1rem; }
+            .nav-links { gap: 1.5rem; }
+            .page-title h1 { font-size: 2.4rem; }
+            .hero-cover { height: 250px; }
+            .hero-cover .overlay-text { font-size: 2.4rem; }
+            .team-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="nav-bar">
+        <span class="logo">EIEAT · 2026</span>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#" class="active">Team</a>
+            <a href="#">Experience</a>
+            <a href="#">Events</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="page-title">
+        <h1>Excellence in Education & Training</h1>
+        <div class="sub">International advisory · strategic growth · sovereign insight</div>
+    </div>
+
+    <div class="hero-cover">
+        <img src="https://eieat.com/wp-content/uploads/2024/02/untitled-design-33.png" alt="team cover" loading="lazy">
+        <div class="overlay-text">Our Team</div>
+    </div>
+
+    <div class="team-grid">
+
+        <div class="team-card">
+            <img class="card-image" src="https://eieat.com/wp-content/uploads/2024/02/046.jpg" alt="Gerardo Barrios" loading="lazy">
+            <div class="card-name">Gerardo Barrios</div>
+            <div class="card-title">Managing Director & Founder</div>
+            <div class="card-desc">Strategic Performance. Subject Matter Expert in Hospitality.</div>
+            <a class="card-link" href="#">About <span style="font-size:1.2rem;">→</span></a>
+        </div>
+
+        <div class="team-card">
+            <img class="card-image" src="https://eieat.com/wp-content/uploads/2024/02/daysi-barrios.jpg" alt="Daysi Barrios" loading="lazy">
+            <div class="card-name">Daysi Barrios</div>
+            <div class="card-title">CEO & Founder</div>
+            <div class="card-desc">Strategic Growth & Accreditation Specialist.</div>
+            <a class="card-link" href="#">About <span style="font-size:1.2rem;">→</span></a>
+        </div>
+
+        <div class="team-card">
+            <img class="card-image" src="https://eieat.com/wp-content/uploads/2024/02/wallace-200x300-3.jpg" alt="Vincent Vanderpool-Wallace" loading="lazy">
+            <div class="card-name">Vincent Vanderpool-Wallace</div>
+            <div class="card-title">Chairman & Founder</div>
+            <div class="card-desc">Sovereign Strategy & Tourism Authority.</div>
+            <a class="card-link" href="#">About <span style="font-size:1.2rem;">→</span></a>
+        </div>
+
+        <div class="team-card">
+            <img class="card-image" src="https://eieat.com/wp-content/uploads/2024/04/hilarybecker4.jpg" alt="Dr. Hilary Becker" loading="lazy">
+            <div class="card-name">Dr. Hilary Becker</div>
+            <div class="card-title">Senior Advisor</div>
+            <div class="card-desc">PhD Strategic Management & Tourism.</div>
+            <a class="card-link" href="#">About <span style="font-size:1.2rem;">→</span></a>
+        </div>
+
+        <div class="team-card">
+            <img class="card-image" src="https://eieat.com/wp-content/uploads/2024/02/photo-paul-grey-suit-v2019-08.jpg" alt="Dr. Paul Lieblich" loading="lazy">
+            <div class="card-name">Dr. Paul Lieblich</div>
+            <div class="card-title">Advisor</div>
+            <div class="card-desc">PhD Education & IB Innovation.</div>
+            <a class="card-link" href="#">About <span style="font-size:1.2rem;">→</span></a>
+        </div>
+
+        <div class="team-card">
+            <img class="card-image" src="https://eieat.com/wp-content/uploads/2024/05/dr-elliston-rahming.jpg" alt="Dr. Elliston Rahming" loading="lazy">
+            <div class="card-name">H. E. Dr. Elliston Rahming</div>
+            <div class="card-title">Sovereign Policy & Social Development</div>
+            <div class="card-desc">Sovereign Policy & Social Development.</div>
+            <a class="card-link" href="#">About <span style="font-size:1.2rem;">→</span></a>
+        </div>
+
+    </div>
+
+    <div style="height: 2rem;"></div>
+
+    <div class="footer-note">
+        <span>© 2026 Excellence in International Education, Advisory & Training</span>
+        <span>smooth · clear · 2026</span>
+    </div>
+
+    <script>
+        (function() {
+            console.log('2026 team page — clean & slick');
+            const cards = document.querySelectorAll('.team-card');
+            cards.forEach(c => {
+                c.addEventListener('mouseenter', () => {});
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === "#") return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        })();
+    </script>
+</div>
+</body>
+</html>
